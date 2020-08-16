@@ -26,8 +26,18 @@ db.WorkoutPlan.create({ name: "Workout Plan" })
     console.log(message);
   });
 
+  app.get("/exercise", (req, res) => {
+    db.Exercise.find({})
+      .then(dbExercise => {
+        res.json(dbExercise);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
+
 // submit exercise to dbWorkoutPlan
-  app.post("/submit", ({body}, res) => {
+  app.post("/exercise", ({body}, res) => {
     db.Exercise.create(body)
       .then(({_id}) => db.WorkoutPlan.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
       .then(dbWorkoutPlan => {
@@ -37,6 +47,18 @@ db.WorkoutPlan.create({ name: "Workout Plan" })
         res.json(err);
       });
   });
+
+// show full workout plan
+app.get("/workoutplan", (req, res) => {
+  db.WorkoutPlan.find({})
+    .populate("name")
+    .then(dbWorkoutPlan => {
+      res.json(dbWorkoutPlan);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 
 app.listen(PORT, () => {
