@@ -1,7 +1,6 @@
 const WorkoutPlan = require("./workoutPlan");
 
 module.exports = {
-    Cardio: require("./cardio"),
-    Resistance: require("./resistance"),
+    Exercise: require("./exercise"),
     WorkoutPlan: require("./workoutPlan")
 };
