@@ -1,6 +1,6 @@
-const WorkoutPlan = require("./workoutPlan");
+const WorkoutPlan = require("./workout");
 
 module.exports = {
     Exercise: require("./exercise"),
-    WorkoutPlan: require("./workoutPlan")
+    Workout: require("./workout")
 };
